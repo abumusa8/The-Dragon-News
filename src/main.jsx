@@ -3,9 +3,11 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 import {
   createBrowserRouter,
+  Navigate,
   RouterProvider,
 } from "react-router-dom";
 import HomeLayout from './Layouts/HomeLayout';
+import CatagoryNews from './Pages/CatagoryNews';
 
 
 
@@ -15,8 +17,13 @@ const router = createBrowserRouter([
     element: <HomeLayout></HomeLayout>,
     children:[
       {
+        path: "",
+        element: <Navigate></Navigate>
+      },
+      {
         path: "/category/:id",
-        element: <h2>category</h2>
+        element: <CatagoryNews></CatagoryNews>,
+        loader: ({params}) => fetch (`https://openapi.programming-hero.com/api/news/category/${params.id}`)
       }
     ]
     
